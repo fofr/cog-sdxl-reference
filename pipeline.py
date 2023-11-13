@@ -685,11 +685,6 @@ class StableDiffusionXLReferencePipeline(StableDiffusionXLPipeline):
         # 10. Prepare added time ids & embeddings
         add_text_embeds = pooled_prompt_embeds
 
-        print("Original size: ", original_size)
-        print("Crops coordinates top left: ", crops_coords_top_left)
-        print("Target size: ", target_size)
-        print("Prompt embeds dtype: ", prompt_embeds.dtype)
-
         add_time_ids = self._get_add_time_ids(
             original_size, crops_coords_top_left, target_size, dtype=prompt_embeds.dtype
         )
