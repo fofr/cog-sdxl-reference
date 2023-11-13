@@ -211,10 +211,10 @@ class Predictor(BasePredictor):
         self,
         prompt: str = Input(
             description="Input prompt",
-            default="An astronaut riding a rainbow unicorn",
+            default="",
         ),
         negative_prompt: str = Input(
-            description="Input Negative Prompt",
+            description="Negative prompt",
             default="",
         ),
         image: Path = Input(
@@ -241,7 +241,7 @@ class Predictor(BasePredictor):
             default="UniPCMultistep",
         ),
         num_inference_steps: int = Input(
-            description="Number of denoising steps", ge=1, le=500, default=50
+            description="Number of denoising steps", ge=1, le=500, default=30
         ),
         guidance_scale: float = Input(
             description="Scale for classifier-free guidance", ge=1, le=50, default=7.5
@@ -315,8 +315,6 @@ class Predictor(BasePredictor):
 
         if self.is_lora:
             sdxl_kwargs["cross_attention_kwargs"] = {"scale": lora_scale}
-
-        print(common_args, sdxl_kwargs)
 
         output = pipe(**common_args, **sdxl_kwargs)
 
